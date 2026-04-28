@@ -28,7 +28,7 @@ public class User
 
 
     public User(string phoneNumber, string name, Gender gender, RelationShip relationShip, 
-        DateOnly dateOfBirth, string discription, string city)
+        DateOnly dateOfBirth, string description, string city)
     {
         UserId = Guid.NewGuid();
 
@@ -42,7 +42,7 @@ public class User
 
         DateOfBirth = dateOfBirth;
 
-        Description = discription;
+        Description = description;
 
         City = city;
 

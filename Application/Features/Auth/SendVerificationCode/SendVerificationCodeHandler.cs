@@ -1,9 +1,5 @@
 ﻿using Application.Interfaces;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Channels;
 
 namespace Application.Features.Auth.SendVerificationCode
 {
