@@ -11,8 +11,6 @@ namespace Domain.Entities
 
         public DateTimeOffset CreatedAt { get; private set; }
 
-        public bool MatchIsCanceled { get; private set; }
-
         public Match(Guid firstUserId, Guid secondUserId) 
         {
             MatchId = Guid.NewGuid();
@@ -22,11 +20,7 @@ namespace Domain.Entities
             SecondUserId = secondUserId;
 
             CreatedAt = DateTimeOffset.UtcNow;
-
-            MatchIsCanceled = false;
         }
-
-        public void CancelMatch() => MatchIsCanceled = true;
 
     }
 }

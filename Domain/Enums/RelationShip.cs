@@ -4,11 +4,6 @@ using System.Text;
 
 namespace Domain.Enums
 {
-    public enum Gender
-    {
-        Male,
-        Female
-    }
     public enum RelationShip
     {
         Serious, //серьёзные отношения
