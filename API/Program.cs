@@ -1,3 +1,4 @@
+using Infrastructure.Repositories;
 using MediatR;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,8 @@ builder.Services.AddOpenApi();
 builder.Services.AddScoped<Application.Interfaces.ISmsService, Infrastructure.Services.FakeSmsService>();
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Application.Interfaces.ISmsService).Assembly));
 
+builder.Services.AddScoped<Application.Interfaces.IUserRepository, InMemoryUserRepository>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -20,25 +23,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast");
-
 using(var scope = app.Services.CreateScope())
 {
     var mediator = scope.ServiceProvider.GetRequiredService<IMediator>();
@@ -46,9 +30,20 @@ using(var scope = app.Services.CreateScope())
     await mediator.Send(new Application.Features.Auth.SendVerificationCode.SendVerificationCodeCommand("123123123"));
 }
 
+using(var scope = app.Services.CreateScope())
+{
+    var mediator = scope.ServiceProvider.GetRequiredService<IMediator>();
+
+    await mediator.Send(new Application.Features.Auth.RegisterUser.RegisterUserCommand(
+        PhoneNumber: "89200634034",
+        Name: "Артём",
+        Gender: Domain.Enums.Gender.Male,
+        RelationShip: Domain.Enums.RelationShip.Dating,
+        DateOfBirth: new DateOnly(2001, 5, 14),
+        Description: "Тестовое описание",
+        City: "Москва"
+        ));
+}
+
 app.Run();
 
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
