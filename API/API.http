@@ -3,7 +3,7 @@
 POST {{API_HostAddress}}/api/auth/register
 Content-Type: application/json
 {
-  "phoneNumber": "8920043245",
+  "phoneNumber": "89200000001",
   "name": "Артём",
   "gender": "Male",
   "relationShip": "Serious",
@@ -13,3 +13,25 @@ Content-Type: application/json
 }
 
 ###
+
+POST {{API_HostAddress}}/api/auth/register
+Content-Type: application/json
+{
+  "phoneNumber": "89200000002",
+  "name": "Ева",
+  "gender": "Female",
+  "relationShip": "Serious",
+  "dateOfBirth": "2001-05-15",
+  "description": "Тестовое описание 2",
+  "city": "Москва"
+}
+
+###
+
+POST {{API_HostAddress}}/api/likes
+Content-Type: application/json
+
+{
+  "fromUserId": "64f52106-b285-4232-a3c7-31a1df10c8bd",
+  "toUserId": "c6e9e3c9-9679-4f31-abfb-a49f8711881f"
+}
