@@ -20,5 +20,12 @@ namespace Infrastructure.Repositories
 
             return Task.CompletedTask;
         }
+
+        public Task<User?> GetByIdAsync(Guid userId, CancellationToken ct)
+        {
+            var currentUser = _users.FirstOrDefault(user => user.UserId == userId);
+
+            return Task.FromResult(currentUser);
+        }
     }
 }

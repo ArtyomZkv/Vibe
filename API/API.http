@@ -35,3 +35,5 @@ Content-Type: application/json
   "fromUserId": "64f52106-b285-4232-a3c7-31a1df10c8bd",
   "toUserId": "c6e9e3c9-9679-4f31-abfb-a49f8711881f"
 }
+
+GET {{API_HostAddress}}/api/users/
