@@ -1,3 +1,5 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,6 +24,10 @@ builder.Services.AddSingleton<Application.Interfaces.ILikeRepository, InMemoryLi
 builder.Services.AddSingleton<Application.Interfaces.IMatchRepository, InMemoryMatchRepository>();
 
 builder.Services.AddSingleton<Application.Interfaces.IDialogRepository, InMemoryDialogRepository>();
+
+
+builder.Services.AddValidatorsFromAssemblyContaining<API.Validators.RegisterUserRequestValidator>();
+builder.Services.AddFluentValidationAutoValidation();
 
 var app = builder.Build();
 

@@ -1,4 +1,5 @@
-﻿using Application.Features.Auth.RegisterUser;
+﻿using API.Contracts;
+using Application.Features.Auth.RegisterUser;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

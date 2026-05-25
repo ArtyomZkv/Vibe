@@ -30,6 +30,12 @@ public class User
     public User(string phoneNumber, string name, Gender gender, RelationShip relationShip, 
         DateOnly dateOfBirth, string description, string city)
     {
+
+        if (GetExactAge(dateOfBirth) < 18)
+        {
+            throw new InvalidOperationException("Регистрация доступна только с 18 лет.");
+        }
+
         UserId = Guid.NewGuid();
 
         PhoneNumber = phoneNumber;
@@ -55,4 +61,17 @@ public class User
 
     public void AddPhoto(string photoUrl) => Photos.Add(photoUrl);
     public void AddInterest(string interest) => Interests.Add(interest);
+
+    private int GetExactAge(DateOnly dateOfBirth)
+    {
+        var today = DateOnly.FromDateTime(DateTime.UtcNow);
+        var currentAge = today.Year - dateOfBirth.Year;
+
+        if (dateOfBirth.AddYears(currentAge) > today)
+        {
+            currentAge--;
+        }
+
+        return currentAge;
+    }
 }
