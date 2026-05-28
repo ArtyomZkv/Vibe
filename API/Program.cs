@@ -1,6 +1,8 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
-using Infrastructure.Repositories;
+using Infrastructure.Repositories.EfCore;
+using Infrastructure.Repositories.InMemory;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,17 +19,20 @@ builder.Services.AddOpenApi();
 builder.Services.AddScoped<Application.Interfaces.ISmsService, Infrastructure.Services.FakeSmsService>();
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Application.Interfaces.ISmsService).Assembly));
 
-builder.Services.AddSingleton<Application.Interfaces.IUserRepository, InMemoryUserRepository>();
+builder.Services.AddScoped<Application.Interfaces.IUserRepository, UserRepository>();
 
-builder.Services.AddSingleton<Application.Interfaces.ILikeRepository, InMemoryLikeRepository>();
+builder.Services.AddScoped<Application.Interfaces.ILikeRepository, LikeRepository>();
 
-builder.Services.AddSingleton<Application.Interfaces.IMatchRepository, InMemoryMatchRepository>();
+builder.Services.AddScoped<Application.Interfaces.IMatchRepository, MatchRepository>();
 
-builder.Services.AddSingleton<Application.Interfaces.IDialogRepository, InMemoryDialogRepository>();
+builder.Services.AddScoped<Application.Interfaces.IDialogRepository, DialogRepository>();
 
 
 builder.Services.AddValidatorsFromAssemblyContaining<API.Validators.RegisterUserRequestValidator>();
 builder.Services.AddFluentValidationAutoValidation();
+
+builder.Services.AddDbContext<Infrastructure.Persistence.AppDbContext>(options =>
+options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 

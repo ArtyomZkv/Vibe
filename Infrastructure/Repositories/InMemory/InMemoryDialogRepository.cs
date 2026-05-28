@@ -1,6 +1,6 @@
 ﻿using Application.Interfaces;
 using Domain.Entities;
-namespace Infrastructure.Repositories
+namespace Infrastructure.Repositories.InMemory
 {
     public class InMemoryDialogRepository : IDialogRepository
     {
