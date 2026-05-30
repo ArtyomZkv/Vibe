@@ -1,4 +1,6 @@
 ﻿
+using Domain.Exceptions;
+
 namespace Domain.Entities
 {
     public class Like
@@ -14,7 +16,7 @@ namespace Domain.Entities
         public Like(Guid fromUserId, Guid toUserId)
         {
             if (fromUserId == toUserId)
-                throw new InvalidOperationException("Нельзя лайкнуть самого себя");
+                throw new ValidationException("Нельзя лайкнуть самого себя");
 
             LikeId = Guid.NewGuid();
 

@@ -1,4 +1,5 @@
 ﻿using Application.Interfaces;
+using Domain.Exceptions;
 using MediatR;
 
 namespace Application.Features.Users.GetUserProfile
@@ -13,7 +14,7 @@ namespace Application.Features.Users.GetUserProfile
             var currentUser = await _userRepository.GetByIdAsync(request.UserId, ct);
 
             if (currentUser == null)
-                throw new InvalidOperationException("Пользователь не найден");
+                throw new NotFoundException("Пользователь не найден");
 
             var age = DateTime.UtcNow.Year - currentUser.DateOfBirth.Year;
 

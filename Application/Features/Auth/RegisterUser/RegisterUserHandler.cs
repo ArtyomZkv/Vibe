@@ -1,5 +1,6 @@
 ﻿using Application.Interfaces;
 using Domain.Entities;
+using Domain.Exceptions;
 using MediatR;
 
 namespace Application.Features.Auth.RegisterUser
@@ -18,7 +19,7 @@ namespace Application.Features.Auth.RegisterUser
             var existingUser = await _userRepository.GetByPhoneAsync(command.PhoneNumber, ct);
 
             if (existingUser != null)
-                throw new InvalidOperationException("Пользователь c таким номером уже существует");
+                throw new ConflictException("Пользователь c таким номером уже существует");
 
             var user = new User(command.PhoneNumber, 
                 command.Name, command.Gender, command.RelationShip, 

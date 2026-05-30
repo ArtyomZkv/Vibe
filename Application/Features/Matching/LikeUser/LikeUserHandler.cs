@@ -1,5 +1,6 @@
 ﻿using Application.Interfaces;
 using Domain.Entities;
+using Domain.Exceptions;
 using MediatR;
 
 namespace Application.Features.Matching.LikeUser
@@ -26,7 +27,7 @@ namespace Application.Features.Matching.LikeUser
             var currentLike = await _likeRepository.FindLikeAsync(request.FromUserId, request.ToUserId, ct);
 
             if (currentLike != null)
-                throw new InvalidOperationException("Лайк уже создан");
+                throw new ConflictException("Лайк уже создан");
 
             var like = new Like(request.FromUserId, request.ToUserId);
 

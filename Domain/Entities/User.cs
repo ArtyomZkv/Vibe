@@ -1,4 +1,5 @@
 ﻿using Domain.Enums;
+using Domain.Exceptions;
 
 namespace Domain.Entities;
 
@@ -33,7 +34,7 @@ public class User
 
         if (GetExactAge(dateOfBirth) < 18)
         {
-            throw new InvalidOperationException("Регистрация доступна только с 18 лет.");
+            throw new ValidationException("Регистрация доступна только с 18 лет.");
         }
 
         UserId = Guid.NewGuid();

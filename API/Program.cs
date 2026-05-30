@@ -1,7 +1,6 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Infrastructure.Repositories.EfCore;
-using Infrastructure.Repositories.InMemory;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,9 +26,14 @@ builder.Services.AddScoped<Application.Interfaces.IMatchRepository, MatchReposit
 
 builder.Services.AddScoped<Application.Interfaces.IDialogRepository, DialogRepository>();
 
+builder.Services.AddExceptionHandler<API.ExceptionHandling.GlobalExceptionHandler>();
+
 
 builder.Services.AddValidatorsFromAssemblyContaining<API.Validators.RegisterUserRequestValidator>();
 builder.Services.AddFluentValidationAutoValidation();
+
+builder.Services.AddProblemDetails();
+
 
 builder.Services.AddDbContext<Infrastructure.Persistence.AppDbContext>(options =>
 options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -41,6 +45,8 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
+
+app.UseExceptionHandler();
 
 app.UseHttpsRedirection();
 
