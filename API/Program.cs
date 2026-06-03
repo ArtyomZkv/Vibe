@@ -28,15 +28,20 @@ builder.Services.AddScoped<Application.Interfaces.IDialogRepository, DialogRepos
 
 builder.Services.AddExceptionHandler<API.ExceptionHandling.GlobalExceptionHandler>();
 
-
 builder.Services.AddValidatorsFromAssemblyContaining<API.Validators.RegisterUserRequestValidator>();
+
 builder.Services.AddFluentValidationAutoValidation();
+
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = builder.Configuration["Redis:Connection"];
+});
 
 builder.Services.AddProblemDetails();
 
 
 builder.Services.AddDbContext<Infrastructure.Persistence.AppDbContext>(options =>
-options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 

@@ -3,11 +3,11 @@
 POST {{API_HostAddress}}/api/auth/register
 Content-Type: application/json
 {
-  "phoneNumber": "89200000003",
+  "phoneNumber": "89200000009",
   "name": "Артём",
   "gender": "Male",
   "relationShip": "Serious",
-  "dateOfBirth": "2001-05-14",
+  "dateOfBirth": "2015-05-14",
   "description": "Тестовое описание",
   "city": "Москва"
 }
