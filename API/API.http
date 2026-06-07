@@ -40,3 +40,8 @@ Content-Type: application/json
 GET {{API_HostAddress}}/api/users/9a937bee-06f6-4f05-b486-6050965a105e
 Accept: application/json
 
+###
+GET {{API_HostAddress}}/api/auth/send-code
+Content-Type: application/json
+
+{"phoneNumber": "89200600434"}

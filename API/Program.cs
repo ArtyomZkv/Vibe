@@ -1,5 +1,7 @@
+using Application.Interfaces;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Infrastructure.Persistence;
 using Infrastructure.Repositories.EfCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,16 +17,18 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 builder.Services.AddOpenApi();
 
 // Регистрируем сервисы в DI-контейнере
-builder.Services.AddScoped<Application.Interfaces.ISmsService, Infrastructure.Services.FakeSmsService>();
+builder.Services.AddScoped<ISmsService, Infrastructure.Services.FakeSmsService>();
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Application.Interfaces.ISmsService).Assembly));
 
-builder.Services.AddScoped<Application.Interfaces.IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
-builder.Services.AddScoped<Application.Interfaces.ILikeRepository, LikeRepository>();
+builder.Services.AddScoped<ILikeRepository, LikeRepository>();
 
-builder.Services.AddScoped<Application.Interfaces.IMatchRepository, MatchRepository>();
+builder.Services.AddScoped<IMatchRepository, MatchRepository>();
 
-builder.Services.AddScoped<Application.Interfaces.IDialogRepository, DialogRepository>();
+builder.Services.AddScoped<IDialogRepository, DialogRepository>();
+
+builder.Services.AddScoped<IVerificationCodeStore, RedisVerificationCodeStore>();
 
 builder.Services.AddExceptionHandler<API.ExceptionHandling.GlobalExceptionHandler>();
 

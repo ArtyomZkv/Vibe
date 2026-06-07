@@ -1,5 +1,6 @@
 ﻿using API.Contracts;
 using Application.Features.Auth.RegisterUser;
+using Application.Features.Auth.SendVerificationCode;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,6 +23,16 @@ namespace API.Controllers
             var userId = await _mediator.Send(userCommand, ct);
 
             return Ok(userId);
-        } 
+        }
+        [HttpPost("send-code")]
+        public async Task<IActionResult> SendCode([FromBody] SendCodeRequest codeRequest, CancellationToken ct)
+        {
+            var codeCommand = new SendVerificationCodeCommand(codeRequest.PhoneNumber);
+
+            await _mediator.Send(codeCommand, ct);
+
+            return Ok();
+        }
+        
     }
 }
