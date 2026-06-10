@@ -7,7 +7,7 @@ namespace Application.Features.Users.GetUserProfile
     public record UserProfileDto(
         Guid UserId,
         string Name,
-        int Age,
+        int? Age,
         string City,
         string Description,
         List<string> Interests,

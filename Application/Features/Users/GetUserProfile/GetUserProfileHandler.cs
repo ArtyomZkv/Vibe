@@ -16,14 +16,15 @@ namespace Application.Features.Users.GetUserProfile
             if (currentUser == null)
                 throw new NotFoundException("Пользователь не найден");
 
-            var age = DateTime.UtcNow.Year - currentUser.DateOfBirth.Year;
+            if (!currentUser.IsProfileComplete)
+                throw new NotFoundException("Профиль не заполнен");
 
             var dto = new UserProfileDto(
                 UserId: currentUser.UserId,
-                Name: currentUser.Name,
-                Age: age,
-                City: currentUser.City,
-                Description: currentUser.Description,
+                Name: currentUser.Name!,
+                Age: currentUser.Age,
+                City: currentUser.City!,
+                Description: currentUser.Description!,
                 Interests: currentUser.Interests,
                 Photos: currentUser.Photos
                 );
