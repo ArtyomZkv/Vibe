@@ -9,17 +9,19 @@ public class User
 
     public string PhoneNumber { get; private set; }
 
-    public Gender Gender { get; private set; }
+    public Gender? Gender { get; private set; }
 
-    public RelationShip RelationShip { get; private set; }
+    public RelationShip? RelationShip { get; private set; }
 
-    public string Name { get; private set; }
+    public string? Name { get; private set; }
 
-    public DateOnly DateOfBirth { get; private set; }
+    public DateOnly? DateOfBirth { get; private set; }
 
-    public string Description { get; private set; }
+    public int? Age => DateOfBirth != null ? GetExactAge(DateOfBirth.Value) : null;
 
-    public string City { get; private set; }
+    public string? Description { get; private set; }
+
+    public string? City { get; private set; }
 
     public List<string> Interests { get; private set; }
 
@@ -27,8 +29,22 @@ public class User
 
     public DateTimeOffset CreatedAt { get; private set; }
 
+    public bool IsProfileComplete => Name != null;
 
-    public User(string phoneNumber, string name, Gender gender, RelationShip relationShip, 
+    public User(string phoneNumber)
+    {
+        UserId = Guid.NewGuid();
+
+        PhoneNumber = phoneNumber;
+
+        CreatedAt = DateTimeOffset.UtcNow;
+
+        Interests = new();
+
+        Photos = new();
+    }
+
+    public void UpdateProfile(string name, Gender gender, RelationShip relationShip, 
         DateOnly dateOfBirth, string description, string city)
     {
 
@@ -36,10 +52,6 @@ public class User
         {
             throw new ValidationException("Регистрация доступна только с 18 лет.");
         }
-
-        UserId = Guid.NewGuid();
-
-        PhoneNumber = phoneNumber;
 
         Name = name;
 
@@ -52,12 +64,6 @@ public class User
         Description = description;
 
         City = city;
-
-        Interests = new();
-
-        Photos = new();
-
-        CreatedAt = DateTimeOffset.UtcNow;
     }
 
     public void AddPhoto(string photoUrl) => Photos.Add(photoUrl);

@@ -1,4 +1,4 @@
-﻿using API.Contracts;
+﻿/*using API.Contracts;
 using FluentValidation;
 
 namespace API.Validators
@@ -28,3 +28,4 @@ namespace API.Validators
 
     }
 }
+*/

@@ -1,6 +1,6 @@
 ﻿using API.Contracts;
-using Application.Features.Auth.RegisterUser;
 using Application.Features.Auth.SendVerificationCode;
+using Application.Features.Auth.VerifyCode;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,16 +14,6 @@ namespace API.Controllers
 
         public AuthController(IMediator mediator) => _mediator = mediator;
 
-        [HttpPost("register")]
-        public async Task <IActionResult> Register([FromBody] RegisterUserRequest userRequest, CancellationToken ct)
-        {
-            var userCommand = new RegisterUserCommand(userRequest.PhoneNumber, userRequest.Name, userRequest.Gender,
-                userRequest.RelationShip, userRequest.DateOfBirth, userRequest.Description, userRequest.City);
-
-            var userId = await _mediator.Send(userCommand, ct);
-
-            return Ok(userId);
-        }
         [HttpPost("send-code")]
         public async Task<IActionResult> SendCode([FromBody] SendCodeRequest codeRequest, CancellationToken ct)
         {
@@ -33,6 +23,15 @@ namespace API.Controllers
 
             return Ok();
         }
-        
+
+        [HttpPost("verify-code")]
+        public async Task<IActionResult> VerifyCode([FromBody] VerifyCodeRequest verifyCodeRequest, CancellationToken ct)
+        {
+            var verifyCodeCommand = new VerifyCodeCommand(verifyCodeRequest.PhoneNumber, verifyCodeRequest.Code);
+
+            var result = await _mediator.Send(verifyCodeCommand, ct);
+
+            return Ok(result);
+        }
     }
 }

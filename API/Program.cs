@@ -1,9 +1,11 @@
 using Application.Interfaces;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Infrastructure.Configurations;
 using Infrastructure.Persistence;
 using Infrastructure.Repositories.EfCore;
 using Microsoft.EntityFrameworkCore;
+using Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +19,7 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 builder.Services.AddOpenApi();
 
 // Регистрируем сервисы в DI-контейнере
-builder.Services.AddScoped<ISmsService, Infrastructure.Services.FakeSmsService>();
+builder.Services.AddScoped<ISmsService, FakeSmsService>();
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Application.Interfaces.ISmsService).Assembly));
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
@@ -32,7 +34,7 @@ builder.Services.AddScoped<IVerificationCodeStore, RedisVerificationCodeStore>()
 
 builder.Services.AddExceptionHandler<API.ExceptionHandling.GlobalExceptionHandler>();
 
-builder.Services.AddValidatorsFromAssemblyContaining<API.Validators.RegisterUserRequestValidator>();
+//builder.Services.AddValidatorsFromAssemblyContaining<API.Validators.RegisterUserRequestValidator>();
 
 builder.Services.AddFluentValidationAutoValidation();
 
@@ -43,9 +45,12 @@ builder.Services.AddStackExchangeRedisCache(options =>
 
 builder.Services.AddProblemDetails();
 
+builder.Services.AddSingleton<ITokenService, TokenService>();
 
-builder.Services.AddDbContext<Infrastructure.Persistence.AppDbContext>(options =>
+builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("Jwt"));
 
 var app = builder.Build();
 
