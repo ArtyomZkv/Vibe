@@ -1,6 +1,7 @@
 ﻿using API.Contracts;
 using Application.Features.Matching.LikeUser;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -13,6 +14,7 @@ namespace API.Controllers
 
         public LikesController(IMediator mediator) => _mediator = mediator;
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Like([FromBody]LikeUserRequest likeUserRequest, CancellationToken ct)
         {

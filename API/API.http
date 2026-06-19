@@ -1,14 +1,14 @@
-@API_HostAddress = http://localhost:5013
+@API_HostAddress = https://localhost:7052
 
 POST {{API_HostAddress}}/api/auth/register
 Content-Type: application/json
 {
-  "phoneNumber": "89200000009",
-  "name": "Артём",
+  "phoneNumber": "89200730135",
+  "name": "Виктор Баринов",
   "gender": "Male",
   "relationShip": "Serious",
   "dateOfBirth": "2015-05-14",
-  "description": "Тестовое описание",
+  "description": "Я повар из Клод Моне",
   "city": "Москва"
 }
 
@@ -37,15 +37,16 @@ Content-Type: application/json
 }
 
 ###
-GET {{API_HostAddress}}/api/users/9a937bee-06f6-4f05-b486-6050965a105e
+GET {{API_HostAddress}}/api/users/cb9dad0b-08c8-46c8-8715-e91898abc1e0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjYjlkYWQwYi0wOGM4LTQ2YzgtODcxNS1lOTE4OThhYmMxZTAiLCJleHAiOjE3ODE4NzQyMjMsImlzcyI6IlZpYmVBcGkiLCJhdWQiOiJWaWJlQ2xpZW50In0.E8qiOcz5k-8394OaCVzwVEcIvZggvlJ8OdrCJ2zVq0E
 Accept: application/json
 
 ###
 POST {{API_HostAddress}}/api/auth/send-code
 Content-Type: application/json
-{"phoneNumber": "89200600434" }
+{"phoneNumber": "89200000003" }
 
 ###
 POST {{API_HostAddress}}/api/auth/verify-code
 Content-Type: application/json
-{"phoneNumber": "89200600434", "code": "2633" }
+{"phoneNumber": "89200000003", "code": "3393" }

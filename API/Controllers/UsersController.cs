@@ -1,5 +1,6 @@
 ﻿using Application.Features.Users.GetUserProfile;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -12,6 +13,7 @@ namespace API.Controllers
 
         public UsersController(IMediator mediator) => _mediator = mediator;
 
+        [Authorize]
         [HttpGet("{userId:guid}")]
         public async Task<IActionResult> GetUser(Guid userId, CancellationToken ct)
         {
