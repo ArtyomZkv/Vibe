@@ -1,4 +1,5 @@
 ﻿using API.Contracts;
+using API.Extensions;
 using Application.Features.Matching.LikeUser;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -18,7 +19,7 @@ namespace API.Controllers
         [HttpPost]
         public async Task<IActionResult> Like([FromBody]LikeUserRequest likeUserRequest, CancellationToken ct)
         {
-            var command = new LikeUserCommand(likeUserRequest.FromUserId, likeUserRequest.ToUserId);
+            var command = new LikeUserCommand(User.GetUserId(), likeUserRequest.ToUserId);
 
             var matchResult = await _mediator.Send(command, ct);
 

@@ -1,4 +1,5 @@
-﻿using Application.Features.Users.GetUserProfile;
+﻿using API.Extensions;
+using Application.Features.Users.GetUserProfile;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -17,6 +18,7 @@ namespace API.Controllers
         [HttpGet("{userId:guid}")]
         public async Task<IActionResult> GetUser(Guid userId, CancellationToken ct)
         {
+            Console.WriteLine(User.GetUserId());
             var query = new GetUserProfileQuery(userId);
             var profile = await _mediator.Send(query, ct);
             return Ok(profile);

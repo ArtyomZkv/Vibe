@@ -30,15 +30,16 @@ Content-Type: application/json
 
 POST {{API_HostAddress}}/api/likes
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjYjlkYWQwYi0wOGM4LTQ2YzgtODcxNS1lOTE4OThhYmMxZTAiLCJleHAiOjE3ODE4OTc1OTAsImlzcyI6IlZpYmVBcGkiLCJhdWQiOiJWaWJlQ2xpZW50In0.vJ_aAilqyJnMFOaJLlCtdk6GqVEyBn2OZzP12BxH4EA
 
 {
-  "fromUserId": "9a937bee-06f6-4f05-b486-6050965a105e",
+  "fromUserId": "cb9dad0b-08c8-46c8-8715-e91898abc1e0",
   "toUserId": "cf82b549-ea1c-45db-b5da-04ec9135295d"
 }
 
 ###
 GET {{API_HostAddress}}/api/users/cb9dad0b-08c8-46c8-8715-e91898abc1e0
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjYjlkYWQwYi0wOGM4LTQ2YzgtODcxNS1lOTE4OThhYmMxZTAiLCJleHAiOjE3ODE4NzQyMjMsImlzcyI6IlZpYmVBcGkiLCJhdWQiOiJWaWJlQ2xpZW50In0.E8qiOcz5k-8394OaCVzwVEcIvZggvlJ8OdrCJ2zVq0E
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjYjlkYWQwYi0wOGM4LTQ2YzgtODcxNS1lOTE4OThhYmMxZTAiLCJleHAiOjE3ODE4OTc1OTAsImlzcyI6IlZpYmVBcGkiLCJhdWQiOiJWaWJlQ2xpZW50In0.vJ_aAilqyJnMFOaJLlCtdk6GqVEyBn2OZzP12BxH4EA
 Accept: application/json
 
 ###
@@ -49,4 +50,4 @@ Content-Type: application/json
 ###
 POST {{API_HostAddress}}/api/auth/verify-code
 Content-Type: application/json
-{"phoneNumber": "89200000003", "code": "3393" }
+{"phoneNumber": "89200000003", "code": "7209" }
