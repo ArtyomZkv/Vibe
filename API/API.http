@@ -50,4 +50,18 @@ Content-Type: application/json
 ###
 POST {{API_HostAddress}}/api/auth/verify-code
 Content-Type: application/json
-{"phoneNumber": "89200000003", "code": "7209" }
+{"phoneNumber": "89200000003", "code": "9563" }
+
+###
+PUT {{API_HostAddress}}/api/users/update-profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjYjlkYWQwYi0wOGM4LTQ2YzgtODcxNS1lOTE4OThhYmMxZTAiLCJleHAiOjE3ODIxNTEwNjksImlzcyI6IlZpYmVBcGkiLCJhdWQiOiJWaWJlQ2xpZW50In0.qHnBpN0YL4d6acr-RH6CNrA8MaZ4gWGld8e5BGTOUdM
+Content-Type: application/json
+
+{
+  "name": "Артём",
+  "gender": "Male",
+  "relationShip": "Serious",
+  "dateOfBirth": "1999-05-14",
+  "description": "...",
+  "city": "Нижний Новгород"
+}

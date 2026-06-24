@@ -14,8 +14,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 var jwtOptions = builder.Configuration.GetSection("Jwt").Get<JwtOptions>();
 
-Console.WriteLine($"Ключик {jwtOptions.Key}, Audience {jwtOptions.Audience}, Issuer {jwtOptions.Issuer}" );
-
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter());
@@ -41,7 +39,7 @@ builder.Services.AddScoped<IVerificationCodeStore, RedisVerificationCodeStore>()
 
 builder.Services.AddExceptionHandler<API.ExceptionHandling.GlobalExceptionHandler>();
 
-//builder.Services.AddValidatorsFromAssemblyContaining<API.Validators.RegisterUserRequestValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<API.Validators.RegisterUserRequestValidator>();
 
 builder.Services.AddFluentValidationAutoValidation();
 

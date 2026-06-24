@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Domain.Enums;
 
 namespace Application.Interfaces
 {
@@ -8,5 +9,7 @@ namespace Application.Interfaces
         Task AddAsync(User user, CancellationToken ct);
 
         Task<User?> GetByIdAsync(Guid userId, CancellationToken ct);
+
+        Task SaveNewProfileAsync(User user, CancellationToken ct);
     }
 }

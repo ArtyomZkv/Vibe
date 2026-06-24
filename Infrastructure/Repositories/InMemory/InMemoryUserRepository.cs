@@ -27,5 +27,10 @@ namespace Infrastructure.Repositories.InMemory
 
             return Task.FromResult(currentUser);
         }
+
+        public Task SaveNewProfileAsync(User user, CancellationToken ct)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

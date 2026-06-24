@@ -1,16 +1,16 @@
-﻿/*using API.Contracts;
+﻿using API.Contracts;
 using FluentValidation;
 
 namespace API.Validators
 {
-    public class RegisterUserRequestValidator : AbstractValidator<RegisterUserRequest>
+    public class RegisterUserRequestValidator : AbstractValidator<UpdateProfileRequest>
     {
         public RegisterUserRequestValidator()
         {
-            RuleFor(x => x.PhoneNumber)
+            /*RuleFor(x => x.PhoneNumber)
                 .NotEmpty()
                 .Matches(@"^\+?[1-9]\d{10,14}$");
-
+*/
             RuleFor(x => x.Name)
                 .NotEmpty()
                 .Length(2,50);
@@ -28,4 +28,3 @@ namespace API.Validators
 
     }
 }
-*/

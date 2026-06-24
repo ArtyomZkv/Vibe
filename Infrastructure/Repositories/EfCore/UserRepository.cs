@@ -1,5 +1,6 @@
 ﻿using Application.Interfaces;
 using Domain.Entities;
+using Domain.Enums;
 using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
@@ -31,6 +32,11 @@ namespace Infrastructure.Repositories.EfCore
         {
             return
                 await _dbContext.Users.FirstOrDefaultAsync(user => user.PhoneNumber == phoneNumber, ct);
-        } 
+        }
+
+        public async Task SaveNewProfileAsync(User user, CancellationToken ct)
+        {
+            await _dbContext.SaveChangesAsync(ct);
+        }
     }
 }
