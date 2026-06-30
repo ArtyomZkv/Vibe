@@ -50,11 +50,11 @@ Content-Type: application/json
 ###
 POST {{API_HostAddress}}/api/auth/verify-code
 Content-Type: application/json
-{"phoneNumber": "89200000003", "code": "9563" }
+{"phoneNumber": "89200000003", "code": "4014" }
 
 ###
 PUT {{API_HostAddress}}/api/users/update-profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjYjlkYWQwYi0wOGM4LTQ2YzgtODcxNS1lOTE4OThhYmMxZTAiLCJleHAiOjE3ODIxNTEwNjksImlzcyI6IlZpYmVBcGkiLCJhdWQiOiJWaWJlQ2xpZW50In0.qHnBpN0YL4d6acr-RH6CNrA8MaZ4gWGld8e5BGTOUdM
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjYjlkYWQwYi0wOGM4LTQ2YzgtODcxNS1lOTE4OThhYmMxZTAiLCJleHAiOjE3ODIxNTExOTUsImlzcyI6IlZpYmVBcGkiLCJhdWQiOiJWaWJlQ2xpZW50In0.zbyhGUzRvaJBQnE7J_Y7dH5JPFV8R4PSlltVBGOh4CA
 Content-Type: application/json
 
 {

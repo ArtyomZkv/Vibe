@@ -11,5 +11,10 @@ namespace Infrastructure.Repositories.InMemory
 
             return Task.CompletedTask;
         }
+
+        public Task<Dialog?> GetByIdAsync(Guid dialogGuid, CancellationToken ct)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

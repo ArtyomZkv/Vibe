@@ -12,5 +12,10 @@ namespace Infrastructure.Repositories.InMemory
 
             return Task.CompletedTask;
         }
+
+        public Task<Match?> GetByIdAsync(Guid matchId, CancellationToken ct)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

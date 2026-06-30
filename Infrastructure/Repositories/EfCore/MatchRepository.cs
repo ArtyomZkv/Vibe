@@ -1,6 +1,7 @@
 ﻿using Application.Interfaces;
 using Domain.Entities;
 using Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -21,6 +22,12 @@ namespace Infrastructure.Repositories.EfCore
             await _dbContext.Matches.AddAsync(match, ct);
 
             await _dbContext.SaveChangesAsync(ct);
+        }
+
+        public async Task<Match?> GetByIdAsync(Guid matchId, CancellationToken ct)
+        {
+            return
+                await _dbContext.Matches.FirstOrDefaultAsync(match => match.MatchId == matchId, ct);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Application.Interfaces;
 using Domain.Entities;
 using Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories.EfCore
 {
@@ -18,6 +19,12 @@ namespace Infrastructure.Repositories.EfCore
             await _dbContext.Dialogs.AddAsync(dialog, ct);
 
             await _dbContext.SaveChangesAsync(ct);
+        }
+
+        public async Task<Dialog?> GetByIdAsync(Guid dialogId, CancellationToken ct)
+        {
+            return
+                await _dbContext.Dialogs.FirstOrDefaultAsync(dialog => dialog.DialogId == dialogId, ct);
         }
     }
 }

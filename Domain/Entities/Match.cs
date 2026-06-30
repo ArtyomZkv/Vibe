@@ -22,5 +22,7 @@ namespace Domain.Entities
             CreatedAt = DateTimeOffset.UtcNow;
         }
 
+        public bool HasParticipant(Guid userId) 
+            => userId == FirstUserId || userId == SecondUserId;
     }
 }

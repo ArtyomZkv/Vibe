@@ -9,6 +9,7 @@ using Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using API.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,7 +36,11 @@ builder.Services.AddScoped<IMatchRepository, MatchRepository>();
 
 builder.Services.AddScoped<IDialogRepository, DialogRepository>();
 
+builder.Services.AddScoped<IMessageRepository, MessageRepository>();
+
 builder.Services.AddScoped<IVerificationCodeStore, RedisVerificationCodeStore>();
+
+builder.Services.AddScoped<IDialogRepository, DialogRepository>();
 
 builder.Services.AddExceptionHandler<API.ExceptionHandling.GlobalExceptionHandler>();
 
@@ -72,12 +77,25 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+builder.Services.AddSignalR();
+
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+        policy.WithOrigins("null", "http://localhost")  // локальный файл = origin "null"
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials());
+});
+
 var app = builder.Build();
 
+app.UseCors();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    app.MapHub<ChatHub>("/Chat");
 }
 
 app.UseExceptionHandler();
